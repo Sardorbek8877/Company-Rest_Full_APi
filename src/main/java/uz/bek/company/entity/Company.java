@@ -15,7 +15,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String corpName;
 
     @Column(nullable = false)
