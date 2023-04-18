@@ -2,80 +2,80 @@ package uz.bek.company.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import uz.bek.company.entity.Company;
+import uz.bek.company.entity.Department;
 import uz.bek.company.payload.ApiResponse;
-import uz.bek.company.payload.CompanyDto;
-import uz.bek.company.service.CompanyService;
+import uz.bek.company.payload.DepartmentDto;
+import uz.bek.company.service.DepartmentService;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/company")
-public class CompanyController {
+@RequestMapping("/api/department")
+public class DepartmentController {
 
     @Autowired
-    CompanyService companyService;
-
+    DepartmentService departmentService;
 
     /**
-     * GET COMPANIES
-     * @return LIST<COMPANY>
+     * GET DEPARTMENTS
+     * @return LIST<DEPARTMENT>
      */
     @GetMapping
-    public ResponseEntity<List<Company>> getCompanies(){
-        List<Company> companies = companyService.getCompanies();
-        return ResponseEntity.ok(companies);
+    public ResponseEntity<List<Department>> getDepartments(){
+        List<Department> departments = departmentService.getDepartments();
+        return ResponseEntity.ok(departments);
     }
 
     /**
-     * GET COMPANY BY ID
+     * GET DEPARTMENT BY ID
      * @param id
-     * @return APIRESPONSE
+     * @return DEPARTMENT
      */
     @GetMapping("/{id}")
-    public ResponseEntity<Company> getCompanyById(@PathVariable Integer id){
-        Company companyById = companyService.getCompanyById(id);
-        return ResponseEntity.ok(companyById);
+    public ResponseEntity<Department> getDepartmentById(@PathVariable Integer id){
+        Department departmentById = departmentService.getDepartmentById(id);
+        return ResponseEntity.ok(departmentById);
     }
 
     /**
-     * ADD COMPANY
-     * @param companyDto
-     * @return ApiResponse
+     * ADD DEPARTMENT
+     * @param departmentDto
+     * @return API RESPONSE
      */
     @PostMapping
-    public ResponseEntity<ApiResponse> addCompany(@Valid @RequestBody CompanyDto companyDto){
-        ApiResponse apiResponse = companyService.addCompany(companyDto);
+    public ResponseEntity<ApiResponse> addDepartment(@Valid @RequestBody DepartmentDto departmentDto){
+        ApiResponse apiResponse = departmentService.addDepartment(departmentDto);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.CREATED : HttpStatus.CONFLICT).body(apiResponse);
     }
 
     /**
-     * EDIT COMPANY
-     * @param companyDto
+     * EDIT DEPARTMENT
+     * @param departmentDto
      * @param id
-     * @return APIRESPONSE
+     * @return API RESPONSE
      */
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse> editCompany(@Valid @RequestBody CompanyDto companyDto, @PathVariable Integer id){
-        ApiResponse apiResponse = companyService.editCompany(companyDto, id);
+    public ResponseEntity<ApiResponse> editDepartment(@Valid @RequestBody DepartmentDto departmentDto, @PathVariable Integer id){
+        ApiResponse apiResponse = departmentService.editDepartment(departmentDto, id);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
     }
 
     /**
-     * DELETE COMPANY
+     * DELETE DEPARTMENT
      * @param id
-     * @return APIRESPONSE
+     * @return API RESPONSE
      */
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse> deleteCompany(@PathVariable Integer id){
-        ApiResponse apiResponse = companyService.deleteCompany(id);
+    public ResponseEntity<ApiResponse> deleteDepartment(@PathVariable Integer id){
+        ApiResponse apiResponse = departmentService.deleteDepartment(id);
         return ResponseEntity.status(apiResponse.isSuccess() ? HttpStatus.ACCEPTED : HttpStatus.CONFLICT).body(apiResponse);
     }
 
@@ -92,12 +92,3 @@ public class CompanyController {
         return errors;
     }
 }
-
-
-
-
-
-
-
-
-
