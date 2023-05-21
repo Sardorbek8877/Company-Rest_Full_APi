@@ -18,7 +18,7 @@ public class Worker {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
+    @Column(unique = true, nullable = false)
     private String phoneNumber;
 
     @OneToOne
